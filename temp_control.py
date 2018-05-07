@@ -1,12 +1,10 @@
 """Control and measurement of cryostat temperature."""
 
-from instrument_com.devices.oxford.itc503 import ITC
 from PyQt5.QtCore import QMutex, QThread, pyqtSignal
 import math
 from threading import Event, Lock
 import time
 from typing import Optional
-import visa
 
 
 class TempControl(QThread):
