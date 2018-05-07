@@ -1,3 +1,3 @@
-[submodule "gpib_devices"]
-	path = gpib_devices
-	url = https://gitlab.com/t2uni/gpib_devices.git
+[submodule "instrument-com"]
+	path = instrument-com
+	url = https://github.com/NanoPeter/instrument-com.git
