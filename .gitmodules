@@ -1,3 +1,6 @@
 [submodule "instrument-com"]
 	path = instrument-com
 	url = https://github.com/NanoPeter/instrument-com.git
+[submodule "easy2point"]
+	path = easy2point
+	url = https://gitlab.com/t2uni/easy2point.git

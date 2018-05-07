@@ -1,10 +1,12 @@
 """Control and measurement of cryostat temperature."""
 
+from instrument_com.devices.oxford.itc503 import ITC
 from PyQt5.QtCore import QMutex, QThread, pyqtSignal
 import math
-from threading import Event
+from threading import Event, Lock
 import time
 from typing import Optional
+import visa
 
 
 class TempControl(QThread):
@@ -14,6 +16,7 @@ class TempControl(QThread):
         _target_temp  Currently targeted temperature in Kelvins.
         _target_temp_mutex
         _should_run_event
+        _itc_device  Wrapped ITC GPIB device for physical temperature measurement.
     Properties:
         target_temp
     """
@@ -76,7 +79,7 @@ class TempControl(QThread):
 
         while self._should_run.is_set():
             # Is temperature in target range?
-            if math.isclose(self._read_temp(), self.target_temp):
+            if math.isclose(self._read_temp(), self.target_temp, abs_tol=self.temp_tolerance):
                 _stablilize_temp()
                 self.temperature_reached.emit(self._read_temp())
 
